@@ -7,4 +7,3 @@ My solutions for the exercises in Graham Hutton's Programming in Haskell, 2nd ed
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
-# programming-in-haskell-exercises
