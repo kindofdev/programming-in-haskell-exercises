@@ -93,13 +93,3 @@ luhn :: Int -> Int -> Int -> Int -> Bool
 luhn x1 x2 x3 x4 = total `mod` 10 == 0
   where total = x4 + luhnDouble x3 + x2 + luhnDouble x1 
 
-
-
-
-
-
-
-
-
-
-
