@@ -1,4 +1,4 @@
-module Ch6 where
+module Ch7 where
 import Data.Char
 
 -- ex1
