@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7f9d8611833959c54d81c61886e0becc4b4f3a821da188c31b0036c254f854ab
+-- hash: 563462d105edcb709987c149772aa230bb6c3e32f4b972fbcd1904bafad8c913
 
 name:           programming-in-haskell-exercises
 version:        0.1.0.0
@@ -27,13 +27,27 @@ source-repository head
 
 library
   exposed-modules:
+      Ch01
+      Ch02
+      Ch03
+      Ch04
+      Ch05
+      Ch06
+      Ch07
+      Ch08
+      Ch09
+      Ch09_Ex6
+      Ch10
+      Ch11
       Lib
+      TicTacToe
   other-modules:
       Paths_programming_in_haskell_exercises
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , random
   default-language: Haskell2010
 
 executable programming-in-haskell-exercises-exe
