@@ -1,0 +1,5 @@
+fst (1+2, 2+3)
+
+Being fst (a,b) = a
+
+We don't need to evaluate b (2+3) in order to get the result (1+2)
