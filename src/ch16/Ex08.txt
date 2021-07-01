@@ -1,0 +1,66 @@
+data Tree = Leaf Int | Node Tree Tree
+            deriving Show
+
+
+- Tree functor
+
+fmap :: (a -> b) -> Tree a -> Tree b
+fmap g (Leaf x)   = Leaf (g x)
+fmap g (Tree l r) = Node (fmap g l) (fmap g r)
+
+-- Functor laws
+
+fmap id = id
+fmap (g . h) = fmap g . fmap h
+
+
+--- id proof ---
+
+- Base case
+
+   fmap id (Leaf x)
+=     { applying fmap }
+   Leaf (id x)
+=     { applying id }
+   Leaf x
+=     { unapplying id }
+   id (Leaf x)
+
+
+- Inductive case
+
+   fmap id (Node l r)
+=     { applying fmap }
+   Node (fmap id l) (fmap id r)
+=     { induction hypothesis }
+   Node l r
+=     { unapplying id }
+  id (Node l r)
+
+
+--- Composition proof ---
+
+- Base case
+
+   fmap (g . h) (Leaf x)
+=     { applying fmap }
+   Leaf ((g . h) x)
+=     { applying . }
+   Leaf g(h x)
+=     { unapplying fmap }
+   fmap g Leaf (h x)
+=     { unapplying fmap }
+   fmap g (fmap h (Leaf x))
+=     { unapplying . }
+   (fmap g . fmap h) (Leaf x)
+
+
+- Inductive case
+
+   fmap (g . h) (Node l r)
+=     { applying fmap }
+   Node (fmap (g . h) l) (fmap (g . h) r)
+=     { induction hypothesis }
+   Node ((fmap g . fmap h) l) ((fmap g . fmap h) r)
+=     { unapplying fmap }
+   (fmap g . fmap h) (Node l r)

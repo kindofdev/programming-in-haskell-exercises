@@ -1,0 +1,42 @@
+xs ++ [] = xs
+
+- Base case
+
+   [] ++ []
+=     { applying ++ }
+   []
+
+- Inductive case
+
+   (x:xs) ++ []
+=     { applying ++ }
+   x : (xs ++ [])
+=     { induction hypothesis }
+   x : xs
+
+
+--------------------
+
+xs ++ (ys ++ zs) = (xs ++ ys) ++ zs
+
+- Base case
+
+   [] ++ (ys ++ zs)
+=     { applying first ++ }
+   ys ++ zs
+=     { unapplying ++ }
+   ([] ++ ys) ++ zs
+
+
+- Inductive case
+
+   (x:xs) ++ (ys ++ zs)
+=     { applying first ++ }
+   x : (xs ++ (ys ++ zs))
+=     { induction hypothesis }
+   x : ((xs ++ ys) ++ zs)
+=     { unapplying ++ }
+   (x:(xs ++ ys)) ++ zs
+=     { unapplying ++ }
+   ((x:xs) ++ ys) ++ zs
+

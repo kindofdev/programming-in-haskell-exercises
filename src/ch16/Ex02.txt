@@ -1,0 +1,21 @@
+add n m = add m n
+
+- Base case
+
+   add Zero m
+=     { applying add }
+   m
+=     { prop of add }
+   add m Zero
+
+
+- Inductive case
+
+  add (Succ n) m
+=     { applying add }
+  Succ (add n m)
+=     { induction hypothesis }
+  Succ (add m n)
+=     { prop of add }
+  add m (Succ n)
+

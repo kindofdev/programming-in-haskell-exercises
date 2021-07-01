@@ -1,0 +1,60 @@
+- Maybe functor
+
+fmap :: (a -> b) -> Maybe a -> Maybe b
+fmap g Nothing = Nothing
+fmap g (Just a) = Just (g a)
+
+-- Functor laws
+
+fmap id = id
+fmap (g . h) = fmap g . fmap h
+
+--- Id proof ---
+
+- Nothing case
+
+   fmap id Nothing
+=     { applying fmap }
+   Nothing
+=     { unapplying id }
+   id Nothing
+
+- Just case
+
+   fmap id (Just v)
+=     { applying fmap }
+   Just (id v)
+=     { applying id }
+   Just v
+=     { unapplying id }
+   id (Just v)
+
+
+--- Composition proof ---
+
+- Nothing case
+
+   fmap (g . h) Nothing
+=     { applying fmap }
+   Nothing
+=     { unapplying fmap }
+   fmap g Nothing
+=     { unapplying fmap }
+   fmap g (fmap h Nothing)
+=     { unapplying . }
+   (fmap g . fmap h) Nothing
+
+
+- Just case
+
+   fmap (g . h) (Just v)
+=     { applying fmap }
+   Just ((g . h) v)
+=     { applying . }
+   Just (g (h v))
+=     { unapplying fmap }
+   fmap g (Just (h v))
+=     { unapplying fmap }
+   fmap g (fmap h (Just v))
+=     { unapplying . }
+   (fmap g . fmap h) (Just v)

@@ -1,0 +1,78 @@
+-- Applicative Maybe
+
+pure :: a -> Maybe a
+pure = Just
+
+(<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
+Nothing <*> _ = Nothing
+(Just g) <*> mx = fmap g mx
+
+fmap :: (a -> b) -> Maybe a -> Maybe b
+fmap g Nothing = Nothing
+fmap g (Just a) = Just (g a)
+
+
+-- Applicative laws
+
+1. pure id <*> x = x
+2. pure (g x) = pure g <*> pure x
+3. x <*> pure y = pure (\g -> g y) <*> x
+4. x <*> (y <*> z) = (pure (.) <*> x <*> y) <*> z
+
+
+--- Law 1 proof ---
+
+- Case Nothing
+
+   pure id <*> Nothing
+=     { applying pure }
+   Just id <*> Nothing
+=     { applying <*> }
+   fmap id Nothing
+=     { applying fmap }
+   Nothing
+
+
+- Case Just
+
+   pure id <*> Just x
+=     { applying pure }
+   Just id <*> Just x
+=     { applying <*> }
+   fmap id (Just x)
+=     { applying fmap }
+   Just (id x)
+=     { applying id }
+   Just x
+
+
+--- Law 2 proof ---
+
+- Case Nothing
+
+   pure (g Nothing)
+=     { applying pure }
+   Just (g Nothing)
+=     { unapplying fmap }
+   fmap g (Just Nothing)
+=     { unapplying <*> }
+   Just g <*> Just Nothing
+=     { unapplying pure }
+   pure g <*> pure Nothing
+
+
+- Case Just
+
+   pure (g (Just x))
+=     { applying pure }
+   Just (g (Just x))
+=     { unapplying fmap }
+   fmap g (Just (Just x))
+=     { unapplying fmap }
+   Just g <*> Just (Just x)
+=     { unapplying pure }
+   pure g <*> pure (Just x)
+
+
+-- TODO Law 3 + Law 4
+

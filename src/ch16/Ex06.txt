@@ -1,0 +1,26 @@
+countLeaves t - countNodes t = 1
+
+- Base case
+
+   countLeaves (Leaf n) - countNodes (Leaf n)
+=     { applying countLeaves }
+   1 - countNodes (Leaf n)
+=     { applying countNodes }
+   1 - 0
+=     { applying - }
+   1
+
+
+- Inductive case
+
+   countLeaves (Node l r) - countNodes (Node l r)
+=     { applying countLeaves }
+   (countLeaves l + countLeaves r) - countNodes (Node l r)
+=     { applying countNodes }
+   (countLeaves l + countLeaves r) - (countNodes l + countNodes r + 1)
+=     { induction hypothesis for l }
+   1 + countLeaves r - countNodes r - 1
+=     { induction hypothesis for r }
+   1 + 1 - 1
+=     { applying + and - }
+   1
